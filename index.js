@@ -34,6 +34,28 @@ app.get("/tables", function (request,response){
         })
 });
 
+app.get("/tables2", function (request,response){
+    connection.query("select * from tables where status=1;")
+        .then(([rows,fields])=>{
+            let list = [];
+            rows.forEach((row)=>{
+                list.push(row.name);
+            })
+            response.json(list);
+        })
+});
+
+app.get("/tables3", function (request,response){
+    connection.query("select * from tables where status=2;")
+        .then(([rows,fields])=>{
+            let list = [];
+            rows.forEach((row)=>{
+                list.push(row.name);
+            })
+            response.json(list);
+        })
+});
+
 app.get("/gettable", function (request,response){
     let name = request.query.name;
     connection.query("select * from " + name +";")
